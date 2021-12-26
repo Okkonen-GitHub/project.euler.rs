@@ -20,7 +20,7 @@ fn gen_prime() -> u64 { // Just brute force it by counting every prime until we 
 }
 
 fn is_prime(n: u64) -> bool {
-    for i in 2..(n/2)+1 { // only check divisibility up till 1+n/2 to reduce checking (and runtime) by half
+    for i in 2..((n as f64).sqrt() as u64 +1) { // only check divisibility up till 1+sqrt(n), this inceases performance by a TON
         if n % i == 0 {
             return false
         }
