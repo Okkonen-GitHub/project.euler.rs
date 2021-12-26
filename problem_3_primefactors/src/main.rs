@@ -42,7 +42,7 @@ fn larges_prime_factor(mut n: u64) -> Vec<u64> { // algorithm from https://hello
 fn is_prime(n: &Vec<u64>) -> bool { // check entire vector of primes at a time for efficiency
     // println!("{}", n);
     for p in n.iter() {
-        for i in 2..((p+1)/2) {
+        for i in 2..((*p as f64).sqrt() as u64 +1) {
             // println!("ayo{}", i);
             if p % i == 0 {
                 return false;
