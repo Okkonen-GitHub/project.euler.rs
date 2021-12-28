@@ -67,56 +67,42 @@ fn check_vertical(nums: &[[u64; 20]; 20], n: usize) -> u64 { // this is super me
 // this doesn't even check everything, but it doesn't matter
 fn check_diagonal(nums: [[u64; 20]; 20], n: usize) -> u64 {
     let mut largest_product = 0;
-    for i in 0..nums.len()-n { // first check everything diagonally going down
-        for j in 0..nums.len()-n {
+    for i in 0..nums.len()-n + 1{ // first check everything diagonally going down
+        for j in 0..nums.len()-n + 1 {
             let mut largest = 1;
             for k in 0..4 {
                 largest *= &nums[i+k][j+k];
-                // println!("{}, {}", &nums[i+k][j+k], largest)
             }
             if largest > largest_product {
                 largest_product = largest;
-                println!("{}, {}", i, j);
-
             }
             largest = 1;
             for k in 0..4 {
                 largest *= &nums[j+k][i+k];
-                // println!("{}, {}", &nums[j+k][i+k], largest)
             }
             if largest > largest_product {
                 largest_product = largest;
-                println!("{}, {}", i, j);
 
             }
         }
     }
-    println!("move");
-    for i in 3..nums.len()-n {
-        for j in 3..nums.len()-n {
+    for i in 3..nums.len() - n + 1{ // then we check almost every diagonal going up
+        for j in 3..nums.len()- n + 1 {
             let mut largest = 1;
             for k in 0..4 {
-                // println!("{} {} {}", i,j,k);
                 largest *= &nums[i-k][j+k];
-                // println!("{}", &nums[i-k][j+k])
             }
-            // println!("{}", largest);
             if largest > largest_product {
                 largest_product = largest;
-                println!("{}, {}", i, j);
 
             }
             largest = 1;
             for k in 0..4 {
-                // println!("{} {} 104", i+k,j-k);
-                largest *= &nums[j-k][i+k];
-                // println!("{}, {}", &nums[j-k][i+k], largest)
+                largest *= &nums[j+k][i-k];
             }
             
-            // println!("{}", largest);
             if largest > largest_product {
                 largest_product = largest;
-                println!("largest {} i {}", largest, &nums[j][i]);
             }
         }
     }
